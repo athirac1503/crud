@@ -1,0 +1,64 @@
+{% extends 'admin_app/dashboard.html' %}
+{% load static %}
+{% block admin_dashboard %}
+<link rel="stylesheet" href="{% static 'css/aprofile.css' %}">
+
+<style>
+    .main{
+        width: 800px;
+        background-color: rgb(144, 132, 139);
+        margin-top: 150px;
+        margin-left: 100px;
+        height: 350px;
+        padding-top: 20px;
+    }
+    tr th td {
+        border: solid 1px black;
+    }
+    .table{
+        width: 700px;
+        margin-left: 60px;
+        height: 100px;
+        margin-top: 40px;
+        background-color: #fff;
+        border: solid 2px black;
+    }
+    h1{
+        text-align: center;
+    }
+    button{
+        width: 100px;
+        background-color: black;
+        color: #fff;
+    }
+</style>
+  
+      
+  <div class="main">
+    <h1>View Active/Inactive Student</h1>
+    <table class="table table-bordered-dark  border-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Active/Inactive</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td><button>Active</button></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td><button>Inactive</button></td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  {% endblock %}

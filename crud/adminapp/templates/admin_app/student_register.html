@@ -1,0 +1,227 @@
+{% extends 'admin_app/dashboard.html' %}
+{% load static %}
+{% block admin_dashboard %}
+<!-- <link rel="stylesheet" href="{% static 'css/aprofile.css' %}"> -->
+
+<style>
+  .main{
+      width: 700px;
+      height: 750px;
+      background-color: rgb(236, 176, 236);
+      margin-left: 100px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border: solid 2px #a70278;
+      border-radius: 10px;
+      padding-left: 30px;
+
+  }
+  .form-control{
+      background-color: rgb(236, 176, 236);
+      border: solid 1px rgb(167, 2, 120);
+      border-radius: 10px;
+      margin-top: 20px;
+      width: 400px;
+      margin-left: 80px;
+  }
+  label{
+      font-weight: bold;
+      margin-top: 30px;
+  }
+  h1{
+      text-align: center;
+  }
+  .btn{
+      background-color: rgb(167, 2, 120);
+      border: solid 1px rgb(167, 2, 120);
+      color: #fff;
+      font-weight: bold;
+      margin-left: 200px;
+      width: 200px;
+      margin-top: 20px;
+      border-radius: 10px;
+
+  }
+  span{
+    margin-left: 80px;
+  }
+  
+</style>
+  
+      
+  <div class="main">
+    <h1>Register Student</h1>
+    <form onsubmit="return validate()" method="POST">
+      {% csrf_token %}
+        <div class="row mb-3">
+          <label for="inputname" class="col-sm-2 col-form-label" id="form">Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="stu_name" id="inputName">
+            <span id="s_name"></span>
+          </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputcontact" class="col-sm-2 col-form-label" >Contact</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="stu_contact" id="inputContact">
+              <span id="s_contact"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputemail" class="col-sm-2 col-form-label" >Email</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="stu_email" id="inputEmail">
+              <span id="s_email"></span>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="inputuser" class="col-sm-2 col-form-label" >Username</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="stu_user" id="inputUsername">
+              <span id="s_user"></span>
+            </div>
+          </div>
+        <div class="row mb-3">
+          <label for="inputPassword3" class="col-sm-2 col-form-label input">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" name="stu_pass" id="inputPassword">
+            <span id="s_pass"></span>
+          </div>
+        </div>
+        <div class="row mb-3">
+            <label for="inputconpass" class="col-sm-2 col-form-label">Confirm Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputConpassword">
+              <span id="s_cpass"></span>
+            </div>
+          </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+      </form>
+</div>
+<script>
+  function validate(){
+        var status=1
+        var txt_name=document.getElementById("inputName")
+        var txt_usname=document.getElementById("inputUsername")
+        var txt_contact=document.getElementById("inputContact")
+        var txt_email=document.getElementById('inputEmail')
+        var txt_pswd=document.getElementById("inputPassword")
+        var txt_cpswd=document.getElementById("inputConpassword")
+        var mobile_pattern=/^[6-9]\d{9}$/   
+        var email_pattern=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;         
+
+
+        if(txt_name.value=="")
+        {
+            document.getElementById("s_name").innerHTML="*Please Enter Name"
+            document.getElementById("s_name").style.color="red"
+            txt_name.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("s_name").innerHTML=""
+            txt_name.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_contact.value=="")
+        {
+            document.getElementById("s_contact").innerHTML="*Please Enter contact number"
+            document.getElementById("s_contact").style.color="red"
+            txt_contact.style.borderColor = "red"
+            status=0
+
+        }else if (txt_contact.value.match(mobile_pattern)){
+            txt_contact.style.borderColor = ""
+            document.getElementById("s_contact").innerHTML=""
+            status=1
+        }
+        else{
+            document.getElementById("s_contact").innerHTML="*Please Enter a valid contact number"
+            document.getElementById("s_contact").style.color="red"
+            txt_contact.style.borderColor = "red"
+            status=0
+
+        }
+        if(txt_email.value=="")
+        {
+            document.getElementById("s_email").innerHTML="*Please Enter email id"
+            document.getElementById("s_email").style.color="red"
+            txt_email.style.borderColor = "red"
+            status=0
+        }else if (txt_email.value.match(email_pattern)){
+            txt_email.style.borderColor = ""
+            document.getElementById("s_email").innerHTML=""
+            status=1
+        }
+        else{
+            document.getElementById("s_email").innerHTML="*Please Enter a valid email"
+            document.getElementById("s_email").style.color="red"
+            txt_email.style.borderColor = "red"
+            status=0
+
+        }
+
+        if(txt_usname.value=="")
+        {
+            document.getElementById("s_user").innerHTML="*Please Enter Username"
+            document.getElementById("s_user").style.color="red"
+            txt_usname.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("s_user").innerHTML=""
+            txt_usname.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_pswd.value=="")
+        {
+            document.getElementById("s_pass").innerHTML="*Please Enter Usename"
+            document.getElementById("s_pass").style.color="red"
+            txt_pswd.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("s_pass").innerHTML=""
+            txt_pswd.style.borderColor = ""
+            status=1
+
+
+        }
+        if(txt_cpswd.value=="")
+        {
+            document.getElementById("s_cpass").innerHTML="*Please Enter Confirm Password"
+            document.getElementById("s_cpass").style.color="red"
+            txt_cpswd.style.borderColor = "red"
+            status=0
+
+        }
+        else if(txt_pswd.value!=txt_cpswd.value){
+            document.getElementById("s_cpass").innerHTML="*Password does'nt match "
+            document.getElementById("s_cpass").style.color="red"
+            txt_cpswd.style.borderColor = "red"
+            status=0
+
+        }
+        else{
+            document.getElementById("s_pass").innerHTML=""
+            txt_cpswd.style.borderColor = ""
+            status=1
+
+        }
+        if(status==0){
+            return false;
+        }
+       
+       
+
+       
+    }
+</script>
+  {% endblock %}
